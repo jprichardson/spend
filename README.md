@@ -51,13 +51,32 @@ simpleSend(fromWIF, toAddress, amountSatoshis, function (err, txId) {
 })
 ```
 
-
 ### Limitations
 
 - fixed fee
 - bitcoin/testnet only at the moment
 - simplified outputs (may change to allow additional like `OP_RETURN`)
 - merges all UTXOs
+
+
+Bitcoin Testnet Faucets
+-----------------------
+
+You'll want some Bitcoin Testnet coins to test your applications. You can get them from any
+of the following faucets:
+
+- http://tpfaucet.appspot.com/
+- http://faucet.luis.im/
+- http://testnet.bitcoin.peercoinfaucet.com/
+- https://testnet.coinfaucet.eu/en/
+- http://faucet.haskoin.com/
+
+
+Wanna Test Spending?
+--------------------
+
+Wanna test spending these coins? Checkout the [Coinbolt Cat Shop](https://www.coinbolt.com/catshop/) to
+test your bitcoin applications by buying fake cats that share economic wisdom.
 
 
 License
