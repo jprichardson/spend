@@ -30,4 +30,13 @@
     "url": "https://github.com/jprichardson/simple-spend/issues"
   },
   "homepage": "https://github.com/jprichardson/simple-spend"
+  "dependencies": {
+    "coinkey": "^1.3.0",
+    "coinstring": "*",
+    "cointx": "^0.1.0",
+    "ecdsa": "^0.6.0"
+  },
+  "devDependencies": {
+    "cb-insight": "^0.1.0"
+  }
 }
