@@ -1,22 +1,38 @@
 var assert = require('assert')
-var Blockchain = require('cb-insight')
+// var Blockchain = require('cb-insight')
+var fixtures = require('./fixtures')
 var spend = require('../')
 
 /* global describe, it */
 
 describe('spend', function () {
   it('should create and submit Bitcoin testnet transaction', function (done) {
-    spend.blockchain = new Blockchain('https://test-insight.bitpay.com')
+    var f0 = fixtures.valid[0]
+    // stub this out
+    spend.blockchain = {
+      addresses: {
+        unspents: function (addresses, callback) {
+          callback(null, f0.utxos)
+        }
+      },
+      transactions: {
+        propagate: function (rawTx, callback) {
+          callback()
+        }
+      }
+    }
 
-    var fromWIF = 'cNEJZUkLHcnjvxBN2EfBxZjN3LwQK3r6N2NJLzMguYo5fkRNDesd'
-    // 'cT7ec4UxtwgDbQJT3nANfr84M5V38wWq7YtSwrFbGEzaSAHzNtyi'
-    var toAddress = 'mwgbiF9YcWQ6DCGTC7LkWp1g9c4b3C7VPq'
-    var amountSatoshis = 20000
-
-    spend.createTx(fromWIF, toAddress, amountSatoshis, function (err, rawTx) {
+    // internal method, allows us to peek at rawtx
+    spend.createTx(f0.senderWIF, f0.receiver, f0.amount, function (err, tx) {
       assert.ifError(err)
-      assert.equal(rawTx, f0.tx)
-      done()
+      assert.equal(tx.toHex(), f0.tx)
+
+      // do it again, but make sure other logic works
+      spend(f0.senderWIF, f0.receiver, f0.amount, function (err, txId) {
+        assert.ifError(err)
+        assert.equal(txId, f0.txId)
+        done()
+      })
     })
   })
 })

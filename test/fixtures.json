@@ -1,0 +1,33 @@
+{
+  "valid": [
+    {
+      "type": "basic",
+      "senderWIF": "cNEJZUkLHcnjvxBN2EfBxZjN3LwQK3r6N2NJLzMguYo5fkRNDesd",
+      "receiver": "mwgbiF9YcWQ6DCGTC7LkWp1g9c4b3C7VPq",
+      "_receiverWIF": "cT7ec4UxtwgDbQJT3nANfr84M5V38wWq7YtSwrFbGEzaSAHzNtyi",
+      "amount": 20000,
+      "utxos": [
+        {
+          "txId": "537d36911cf463e9a3a3075f017aeefe777d996339ffe2fc99b57868d438c90d",
+          "address": "n4SEVY8Hn2SsNTqq9rshXRDwpt1HVwku2J",
+          "value": 26763225,
+          "vout": 1
+        },
+        {
+          "txId": "cb129f7fc9e50c79043fba244cb0cc680bd85f8b6fb62d87f4ce1b51d94fbd2e",
+          "address": "n4SEVY8Hn2SsNTqq9rshXRDwpt1HVwku2J",
+          "value": 4000000,
+          "vout": 0
+        },
+        {
+          "txId": "00d748072ae991003a4ce5253f990b5094a683cf61376375cd45d440ae26acd2",
+          "address": "n4SEVY8Hn2SsNTqq9rshXRDwpt1HVwku2J",
+          "value": 1000000,
+          "vout": 0
+        }
+      ],
+      "tx": "01000000030dc938d46878b599fce2ff3963997d77feee7a015f07a3a3e963f41c91367d53010000006a473044022036111066a99fa4fc13096d9ff24deb3744ff4d4a98ec184f2d1f14aca8e29bc2022058329692b54ce7c7d07520c79b6b4e01862e830b45f1157954ea76a253f12c21012102302840d96283b24410ee01597573f505d8ad394ccb1485961fdb94fc4c4b2f50ffffffff2ebd4fd9511bcef4872db66f8b5fd80b68ccb04c24ba3f04790ce5c97f9f12cb000000006b483045022100b3266de6bd0d759ae69e78753629becf08fd2fc1d97e1d2afaeb35350173518f0220135c8dc94da6b0698dad28d5946d0a041bffe10263e7d1516cdef5233fcd3b52012102302840d96283b24410ee01597573f505d8ad394ccb1485961fdb94fc4c4b2f50ffffffffd2ac26ae40d445cd75633761cf83a694500b993f25e54c3a0091e92a0748d700000000006a47304402207c0301d8ed640be8b0e126d6279be6b5338681720ee996dbf59a94328ba4c78f022029c3da4bcf801bd1e85ad2eed4f6926ffec0c92ba6558d3a70f766e6f6363138012102302840d96283b24410ee01597573f505d8ad394ccb1485961fdb94fc4c4b2f50ffffffff02204e0000000000001976a914b154fd8b0e2c159007de8f429674b937578b350088ace935e401000000001976a914fb6655a99e4dd95a0407de6ad1d22e86c2a7300a88ac00000000",
+      "txId": "18f17aac2f650f158ea39258e9ba6bfbfda0a5a39e90607a0c07673bce2af08d"
+    }
+  ]
+}
