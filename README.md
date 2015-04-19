@@ -1,5 +1,5 @@
-Simple Spend
-============
+Spend
+=====
 
 A JavaScript component to create simple Bitcoin / Testnet transactions for integration testing with
 the actual network. Can be used in Node.js or the browser (via Browserify).
@@ -8,13 +8,13 @@ the actual network. Can be used in Node.js or the browser (via Browserify).
 Install
 -------
 
-    npm i --save simple-spend
+    npm i --save spend
 
 
 Usage
 -----
 
-### simpleSend(fromWIF, toAddress, amount, [changeAddress], callback)
+### spend(fromWIF, toAddress, amount, [changeAddress], callback)
 
 - `fromWIF`: Private key with matching address that contains funds. Should be base58 check encoded `string`.
 - `toAddress`: Recipient address. Should be base58 encoded `string`.
@@ -36,16 +36,16 @@ Here's a list: https://github.com/common-blockchain/common-blockchain/issues/21
 
 ```js
 var Blockchain = require('cb-insight') // npm i --save cb-insight
-var simpleSend = require('simple-send')
+var spend = require('spend')
 
 // set common blockchain provider
-simpleSend.blockchain = new Blockchain('https://test-insight.bitpay.com')
+spend.blockchain = new Blockchain('https://test-insight.bitpay.com')
 
 var fromWIF = '...'
 var toAddress = '...'
 var amountSatoshis = 500000
 
-simpleSend(fromWIF, toAddress, amountSatoshis, function (err, txId) {
+spend(fromWIF, toAddress, amountSatoshis, function (err, txId) {
   // use txId to track transaction
   console.log(txId)
 })
@@ -72,8 +72,8 @@ of the following faucets:
 - http://faucet.haskoin.com/
 
 
-Wanna Test Spending?
---------------------
+Test Spending
+-------------
 
 Wanna test spending these coins? Checkout the [Coinbolt Cat Shop](https://www.coinbolt.com/catshop/) to
 test your bitcoin applications by buying fake cats that share economic wisdom.
