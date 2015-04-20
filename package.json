@@ -1,6 +1,6 @@
 {
   "name": "spend",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Create simple Bitcoin / Testnet transactions for integration testing with the actual network.",
   "main": "lib/spend.js",
   "scripts": {
