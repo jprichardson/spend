@@ -22,17 +22,11 @@ describe('spend', function () {
       }
     }
 
-    // internal method, allows us to peek at rawtx
-    spend.createTx(f0.senderWIF, f0.receiver, f0.amount, function (err, tx) {
+    spend(f0.senderWIF, f0.receiver, f0.amount, function (err, txId, rawTx) {
       assert.ifError(err)
-      assert.equal(tx.toHex(), f0.tx)
-
-      // do it again, but make sure other logic works
-      spend(f0.senderWIF, f0.receiver, f0.amount, function (err, txId) {
-        assert.ifError(err)
-        assert.equal(txId, f0.txId)
-        done()
-      })
+      assert.equal(rawTx, f0.tx)
+      assert.equal(txId, f0.txId)
+      done()
     })
   })
 })

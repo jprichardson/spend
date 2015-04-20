@@ -20,7 +20,8 @@ Usage
 - `toAddress`: Recipient address. Should be base58 encoded `string`.
 - `amount`: Amount in **satoshis**. Should be an integer. Either `number` or `string`.
 - `changeAddress`: Optional change address. If not specified, address calculated from `fromWIF` will be used.
-- `callback`: Callback with result. Signature: `(err, txId)`.
+- `callback`: Callback with result. Signature: `(err, txId, rawTx)`. Where `txId` is a `string` representing
+the transaction ID and `rawTx` is the transaction serialized as a `string`.
 
 
 ### Common Blockchain
