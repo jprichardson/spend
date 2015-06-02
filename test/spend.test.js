@@ -11,8 +11,7 @@ describe('spend', function () {
     // stub this out
     new Spender()
       .from(f0.senderWIF)
-      .to(f0.receiver)
-      .satoshis(f0.amount)
+      .to(f0.receiver, f0.amount)
       .data(new Buffer('big spender'))
       .blockchain({
         addresses: {
