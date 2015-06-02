@@ -9,7 +9,8 @@ describe('spend', function () {
   it('should create and submit Bitcoin testnet transaction', function (done) {
     var f0 = fixtures.valid[0]
     // stub this out
-    var spender =  new Spender(f0.senderWIF)
+    var spender =  new Spender()
+      .from(f0.senderWIF)
       .to(f0.receiver)
       .satoshis(f0.amount)
       .data(new Buffer('big spender'))

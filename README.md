@@ -1,20 +1,30 @@
-Spend
+Spender
 =====
+
+forked from [jprichardson/spend](https://github.com/jprichardson/spend)
 
 A JavaScript component to create simple Bitcoin / Testnet transactions for integration testing with
 the actual network. Can be used in Node.js or the browser (via Browserify).
 
-
 Install
 -------
 
-    npm i --save spend
+    npm i --save spender
 
 
 Usage
 -----
 
-### spend(fromWIF, toAddress, amount, [changeAddress], callback)
+```js
+var Spender = require('spender')
+new Spender()
+  .from(fromWIF)
+  .to(toAddress)
+  .satoshis(amount)
+  .change(changeAddress) // optional
+  .data(data)            // optional (OP_RETURN)
+  .spend(callback)
+```
 
 - `fromWIF`: Private key with matching address that contains funds. Should be base58 check encoded `string`.
 - `toAddress`: Recipient address. Should be base58 encoded `string`.
@@ -22,7 +32,6 @@ Usage
 - `changeAddress`: Optional change address. If not specified, address calculated from `fromWIF` will be used.
 - `callback`: Callback with result. Signature: `(err, txId, rawTx)`. Where `txId` is a `string` representing
 the transaction ID and `rawTx` is the transaction serialized as a `string`.
-
 
 ### Common Blockchain
 
