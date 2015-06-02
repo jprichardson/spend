@@ -25,10 +25,10 @@ describe('spend', function () {
           }
         }
       })
-      .spend(function (err, txId, rawTx) {
+      .spend(function (err, tx) {
         assert.ifError(err)
-        assert.equal(rawTx, f0.tx)
-        assert.equal(txId, f0.txId)
+        assert.equal(tx.toHex(), f0.tx)
+        assert.equal(tx.getId().toString('hex'), f0.txId)
         done()
       })
   })
