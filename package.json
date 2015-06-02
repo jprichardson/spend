@@ -33,7 +33,7 @@
   "dependencies": {
     "coinkey": "^1.3.0",
     "coinstring": "*",
-    "cointx": "^0.1.0",
+    "cointx": "git://github.com/mvayngrib/cointx",
     "ecdsa": "^0.6.0"
   },
   "devDependencies": {
