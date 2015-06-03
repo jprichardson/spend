@@ -17,7 +17,7 @@ Usage
 
 ```js
 var Spender = require('spender')
-new Spender()
+new Spender('testnet')
   .from(fromWIF)
   .to(toAddress)
   .satoshis(amount)
