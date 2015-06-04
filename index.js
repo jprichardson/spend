@@ -50,6 +50,11 @@ Spender.prototype.data = function (data) {
   return this
 }
 
+Spender.prototype.fee = function(satoshis) {
+  this.feeAmount = satoshis
+  return this
+}
+
 Spender.prototype.build = function(cb) {
   var self = this
 
@@ -68,6 +73,7 @@ Spender.prototype.build = function(cb) {
     return sum + send.amount
   }, 0)
 
+  var fee = this.feeAmount || FEE
   var myAddr = key.pub.getAddress(this.network).toString()
   var changeAddress = this.changeAddress || myAddr
   var sends = this.sends
@@ -77,15 +83,31 @@ Spender.prototype.build = function(cb) {
   this.chain.addresses.unspents(myAddr, function (err, utxos) {
     if (err) return cb(err)
 
-    var balance = utxos.reduce(function (amount, unspent) {
-      return Number(unspent.value) * 1e8 + amount
-    }, 0)
+    utxos.forEach(function(u) {
+      u.value = Number(u.value)
+      if (parseInt(u.value) !== u.value) {
+        // cb-blockr, i'm looking for you
+        u.value = u.value * 1e8
+      }
+    })
 
-    if (amount > (balance - FEE)) {
+    var needed = amount + fee
+    var collected = 0
+    utxos = utxos.sort(function(a, b) {
+        return b.value - a.value
+      })
+      .filter(function(u) {
+        if (collected < needed) {
+          collected += u.value
+          return true
+        }
+      })
+
+    if (needed > collected) {
       return cb(new Error("Address doesn't contain enough money to send."))
     }
 
-    var change = balance - amount - FEE
+    var change = collected - needed
     var tx = new bitcoin.TransactionBuilder()
     sends.forEach(function(send) {
       tx.addOutput(send.to, send.amount)
@@ -111,13 +133,12 @@ Spender.prototype.build = function(cb) {
 
     delete self._building
     self.tx = tx
-    cb(null, tx)
+    self.usedUnspents = utxos
+    cb(null, tx, utxos)
   })
 }
 
-Spender.prototype.execute =
-Spender.prototype.send =
-Spender.prototype.spend = function (cb) {
+Spender.prototype.execute = function (cb) {
   var self = this
   cb = dezalgo(cb || noop)
 
@@ -140,7 +161,7 @@ Spender.prototype.spend = function (cb) {
 Spender.prototype._spend = function (cb) {
   var self = this
   this.chain.transactions.propagate(this.tx.toHex(), function (err) {
-    cb(err, self.tx)
+    cb(err, self.tx, self.usedUnspents)
   })
 }
 

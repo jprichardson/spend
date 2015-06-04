@@ -11,28 +11,6 @@ Install
 
     npm i --save spender
 
-
-Usage
------
-
-```js
-var Spender = require('spender')
-new Spender('testnet')
-  .from(fromWIF)
-  .to(toAddress)
-  .satoshis(amount)
-  .change(changeAddress) // optional
-  .data(data)            // optional (OP_RETURN)
-  .spend(callback)
-```
-
-- `fromWIF`: Private key with matching address that contains funds. Should be base58 check encoded `string`.
-- `toAddress`: Recipient address. Should be base58 encoded `string`.
-- `amount`: Amount in **satoshis**. Should be an integer. Either `number` or `string`.
-- `changeAddress`: Optional change address. If not specified, address calculated from `fromWIF` will be used.
-- `callback`: Callback with result. Signature: `(err, txId, rawTx)`. Where `txId` is a `string` representing
-the transaction ID and `rawTx` is the transaction serialized as a `string`.
-
 ### Common Blockchain
 
 Common Blockchain is a unified way to access a blockchain via an API provider. i.e. it provides the same methods and
@@ -45,29 +23,23 @@ Here's a list: https://github.com/common-blockchain/common-blockchain/issues/21
 **Example:**
 
 ```js
-var Blockchain = require('cb-insight') // npm i --save cb-insight
-var spend = require('spend')
-
-// set common blockchain provider
-spend.blockchain = new Blockchain('https://test-insight.bitpay.com')
-
-var fromWIF = '...'
-var toAddress = '...'
-var amountSatoshis = 500000
-
-spend(fromWIF, toAddress, amountSatoshis, function (err, txId) {
-  // use txId to track transaction
-  console.log(txId)
-})
+var Blockchain = require('cb-blockr')
+var Spender = require('spender')
+new Spender('testnet')   // network name ('bitcoin' or 'testnet')
+  .blockchain(new Blockchain('testnet')) // common-blockchain provider
+  .from(privateWif)      // string or bitcoinjs-lib's ECKey
+  .to(toAddress)         // string or bitcoinjs-lib's Address
+  .satoshis(amount)      // int satoshis
+  .fee(fee)              // int satoshis
+  .change(changeAddress) // optional
+  .data(data)            // optional (OP_RETURN)
+  .execute(callback)     // calls back with (err, Transaction, utxosUsed)
 ```
 
 ### Limitations
 
-- fixed fee
 - bitcoin/testnet only at the moment
-- simplified outputs (may change to allow additional like `OP_RETURN`)
-- merges all UTXOs
-
+- simplified outputs
 
 Bitcoin Testnet Faucets
 -----------------------
@@ -93,4 +65,3 @@ License
 -------
 
 MIT
-

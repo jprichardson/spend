@@ -25,10 +25,11 @@ describe('spend', function () {
           }
         }
       })
-      .spend(function (err, tx) {
+      .execute(function (err, tx, utxos) {
         assert.ifError(err)
         assert.equal(tx.toHex(), f0.tx)
         assert.equal(tx.getId().toString('hex'), f0.txId)
+        assert.deepEqual(utxos, f0.utxos.slice(0, 1))
         done()
       })
   })
